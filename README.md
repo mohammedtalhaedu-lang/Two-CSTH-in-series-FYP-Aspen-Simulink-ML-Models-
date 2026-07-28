@@ -30,6 +30,8 @@ This repository contains the interactive, responsive A2 academic poster web appl
 ## Repository Structure
 
 
+```text
+.
 ├── index.html        # Main HTML poster document (Semantic HTML5, fully responsive)
 ├── poster.css        # Print-ready A2 stylesheet with CSS Grid, Flexbox, & Mobile Breakpoints
 ├── images/           # All high-resolution diagram & result chart assets
