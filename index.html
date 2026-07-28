@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYP Poster — Mohammed — 2-CSTH Hierarchical Control | APU 2026</title>
+  <meta name="description" content="FYP Academic Poster: Modeling and Simulation of Hierarchical Control of Two Continuous Stirred Tank Heaters in Series — Mohammed, APU, August 2026">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="poster.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       HEADER BAND
+  ══════════════════════════════════════════ -->
+  <header class="poster-header">
+    <div class="header-inner">
+      <div class="header-logo-left">
+        <img src="images/APU_Logo.jpg" alt="Asia Pacific University Logo" class="apu-logo">
+        <div class="institution-text">
+          <div class="institution-name">ASIA PACIFIC UNIVERSITY</div>
+          <div class="institution-sub">of Technology &amp; Innovation</div>
+          <div class="school-name">School of Engineering</div>
+        </div>
+      </div>
+
+      <div class="header-title-center">
+        <div class="poster-main-title">
+          Modeling and Simulation of Hierarchical Control of<br>
+          Two Continuous Stirred Tank Heaters in Series
+        </div>
+        <div class="poster-subtitle">
+          A Digital Twin Approach · Aspen HYSYS V14 · MATLAB/Simulink R2023b · Machine Learning Surrogate Models
+        </div>
+      </div>
+
+      <div class="header-logo-right">
+        <div class="programme-badge">BEng (Hons)<br>Petroleum Engineering</div>
+      </div>
+    </div>
+
+    <div class="metadata-strip">
+      <div class="meta-item">
+        <span class="meta-label">Student</span>
+        <span class="meta-value">Mohammed &nbsp;|&nbsp; TP061730 &nbsp;|&nbsp; APD4F2511PE</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Supervisor</span>
+        <span class="meta-value">Ts. Dr. Muhammad Syahmi Afif Bin Mokhtar Yazid</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">August 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       BODY — 2-COLUMN GRID
+  ══════════════════════════════════════════ -->
+  <main class="poster-body">
+
+    <!-- ─── LEFT COLUMN ─── -->
+    <div class="col col-left">
+
+      <!-- CARD 1: Introduction -->
+      <section class="card card-blue-border">
+        <h2 class="card-title">
+          <span class="section-num">01</span>
+          Introduction &amp; Problem Statement
+        </h2>
+        <p class="body-text">
+          Continuous Stirred Tank Heaters in series <strong>(2-CSTH)</strong> are widely used in petrochemical and pharmaceutical industries for staged thermal processing. Their serial architecture introduces <strong>severe non-linear hydraulic interactions</strong>, transport time delays, and MIMO thermal coupling between tanks.
+        </p>
+        <p class="body-text">
+          Conventional fixed-gain <strong>PID controllers</strong> fail under dynamic transitions: T₂ peaks at <span class="highlight-text">80.88°C for a 75°C setpoint</span> (7.84% overshoot) with a 64-second settling time — causing heater filament fatigue and product degradation in heat-sensitive processes.
+        </p>
+        <p class="body-text">
+          This research bridges first-principles thermodynamic modeling with <strong>Industry 4.0 Digital Twin technology</strong>, deploying ML surrogates (RF, XGBoost, NARX-ANN) to overcome the limitations of classical control and enable real-time virtual sensing.
+        </p>
+        <div class="highlight-box">
+          <span class="hb-icon">⚠</span>
+          <span class="hb-text"><strong>Research Gap:</strong> No existing study bridges Aspen HYSYS industrial steady-state validation with ML-based real-time gain scheduling in a serialized 2-CSTH configuration with hydraulic recycle.</span>
+        </div>
+      </section>
+
+      <!-- CARD 2: Objectives -->
+      <section class="card card-teal-border">
+        <h2 class="card-title">
+          <span class="section-num">02</span>
+          Research Objectives
+        </h2>
+        <ul class="obj-list">
+          <li>
+            <span class="obj-num">O1</span>
+            <span class="obj-text">Derive dynamic <strong>non-linear mass &amp; energy balance ODEs</strong> for the interacting dual-tank system featuring a 20% hydraulic recycle loop.</span>
+          </li>
+          <li>
+            <span class="obj-num">O2</span>
+            <span class="obj-text">Cross-validate steady-state operating points across <strong>Aspen HYSYS V14</strong> (ASME Steam package) and <strong>MATLAB/Simulink R2023b</strong>.</span>
+          </li>
+          <li>
+            <span class="obj-num">O3</span>
+            <span class="obj-text">Design and benchmark multi-loop <strong>PID vs. IMC</strong> strategies for simultaneous level (h₁, h₂) and temperature (T₁, T₂) regulation.</span>
+          </li>
+          <li>
+            <span class="obj-num">O4</span>
+            <span class="obj-text">Train and evaluate <strong>RF, XGBoost &amp; NARX-ANN</strong> Digital Twin state estimators; assess accuracy via R², RMSE, and MAE metrics.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- CARD 3: Governing Equations -->
+      <section class="card card-blue-border">
+        <h2 class="card-title">
+          <span class="section-num">03</span>
+          Mathematical Modeling &amp; Governing Equations
+        </h2>
+
+        <div class="eq-grid">
+          <div class="eq-block">
+            <div class="eq-label">Tank 1 — Mass Balance</div>
+            <div class="eq-formula">dh₁/dt = (F₁ + F₄ − F₂) / A₁</div>
+          </div>
+          <div class="eq-block">
+            <div class="eq-label">Tank 2 — Mass Balance</div>
+            <div class="eq-formula">dh₂/dt = (F₂ − F₃) / A₂</div>
+          </div>
+          <div class="eq-block eq-wide">
+            <div class="eq-label">Tank 1 — Energy Balance</div>
+            <div class="eq-formula">dT₁/dt = [F₁·T<sub>in</sub> + F₄·T₂ − F₂·T₁] / (A₁h₁) + Q₁ / (ρC<sub>p</sub>A₁h₁)</div>
+          </div>
+          <div class="eq-block eq-wide">
+            <div class="eq-label">Tank 2 — Energy Balance</div>
+            <div class="eq-formula">dT₂/dt = F₂(T₁ − T₂) / (A₂h₂) + Q₂ / (ρC<sub>p</sub>A₂h₂)</div>
+          </div>
+        </div>
+
+        <div class="assumptions">
+          <div class="assumption-title">Key Assumptions</div>
+          <div class="assumption-chips">
+            <span class="chip">Perfect mixing (uniform T per tank)</span>
+            <span class="chip">ρ = 1000 kg/m³</span>
+            <span class="chip">Cₚ = 4.186 kJ/kg·K</span>
+            <span class="chip">F₄ = 20% inter-tank recycle</span>
+            <span class="chip">No ambient heat loss</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 4: System Architecture DIAGRAM -->
+      <section class="card card-gold-border">
+        <h2 class="card-title">
+          <span class="section-num">04</span>
+          System Architecture &amp; Process Diagrams
+        </h2>
+
+        <div class="diagram-row">
+          <div class="diagram-item">
+            <div class="diagram-label">📐 Aspen HYSYS V14 — Steady-State Flowsheet</div>
+            <img src="images/AspenModel.png" class="diagram-img" alt="Aspen HYSYS Process Flowsheet">
+            <div class="diagram-caption">Feed → VLV-100 → V-100 (Tank 1) → VLV-300 → V-100-2 (Tank 2) → F3 outlet. LIC-100 level controllers and QIC-100 heat duty controllers validated at T₁ = 59.97°C, T₂ = 69.56°C.</div>
+          </div>
+          <div class="diagram-item">
+            <div class="diagram-label">⚙ MATLAB/Simulink — Dynamic Subsystems</div>
+            <img src="images/CSTH_tanks_subsystems.PNG" class="diagram-img" alt="Simulink CSTH Subsystem Block Diagram">
+            <div class="diagram-caption">CSTH 1 subsystem (F1, T0, Q1, F4 → h1, T1) feeds CSTH 2 (F2, Q2, F3 → h2, T2). T1 output directly couples as T2 input — the core interacting dynamics.</div>
+          </div>
+        </div>
+
+        <div class="params-grid">
+          <div class="param-item">
+            <div class="param-key">Tank Area (A₁, A₂)</div>
+            <div class="param-val">1.5 m²</div>
+          </div>
+          <div class="param-item">
+            <div class="param-key">Steady-State Levels</div>
+            <div class="param-val">h₁ = 1.301 m &nbsp;|&nbsp; h₂ = 1.297 m</div>
+          </div>
+          <div class="param-item">
+            <div class="param-key">Steady-State Temps</div>
+            <div class="param-val">T₁ = 59.97°C &nbsp;|&nbsp; T₂ = 69.56°C</div>
+          </div>
+          <div class="param-item">
+            <div class="param-key">Max Heater Duty</div>
+            <div class="param-val">Q₁, Q₂ = 0 – 150 kW</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Performance Indicators -->
+      <section class="card card-gold-border">
+        <h2 class="card-title">
+          Key Performance Indicators
+        </h2>
+
+        <!-- Model comparison chart -->
+        <div class="result-img-block">
+          <div class="result-img-label">Model Performance Comparison — T₂ Temperature (PID vs IMC vs ANN)</div>
+          <img src="images/Model Performance Comparison for T2 Temperature.png"
+               class="result-img"
+               alt="Model Performance Comparison for T2 Temperature">
+          <div class="result-caption">RF &amp; XGBoost achieve R² &gt; 0.9999 across both PID and IMC datasets. NARX-ANN shows a −270 s phase lead requiring DTW alignment.</div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+
+          <div class="kpi-card kpi-bad">
+            <div class="kpi-value">7.84%</div>
+            <div class="kpi-label">PID Overshoot</div>
+            <div class="kpi-sub">T₂ peaks at 80.88°C for 75°C setpoint</div>
+          </div>
+
+          <div class="kpi-card kpi-good">
+            <div class="kpi-value">75% Faster</div>
+            <div class="kpi-label">IMC Settling</div>
+            <div class="kpi-sub">16 s vs 64 s — IMC vs PID</div>
+          </div>
+
+          <div class="kpi-card kpi-good">
+            <div class="kpi-value">R² &gt; 0.9999</div>
+            <div class="kpi-label">ML Twin Accuracy</div>
+            <div class="kpi-sub">RF &amp; XGBoost — near-perfect prediction</div>
+          </div>
+
+          <div class="kpi-card kpi-neutral">
+            <div class="kpi-value">30%</div>
+            <div class="kpi-label">IAE Reduction (IMC)</div>
+            <div class="kpi-sub">Integral Absolute Error vs PID</div>
+          </div>
+
+          <div class="kpi-card kpi-neutral">
+            <div class="kpi-value">8.30×10⁻¹²</div>
+            <div class="kpi-label">NARX MSE</div>
+            <div class="kpi-sub">Bayesian regularisation — IMC dataset</div>
+          </div>
+
+          <div class="kpi-card kpi-bad">
+            <div class="kpi-value">−270 s</div>
+            <div class="kpi-label">NARX Phase Lead</div>
+            <div class="kpi-sub">Requires DTW pre-processing to align</div>
+          </div>
+
+          <div class="kpi-card kpi-neutral">
+            <div class="kpi-value">+0.07 m</div>
+            <div class="kpi-label">Hydraulic Offset (h₂)</div>
+            <div class="kpi-sub">Recycle loop steady-state deviation</div>
+          </div>
+
+          <div class="kpi-card kpi-good">
+            <div class="kpi-value">IMC + RF</div>
+            <div class="kpi-label">Recommended Architecture</div>
+            <div class="kpi-sub">Best stability + virtual sensing combo</div>
+          </div>
+
+        </div><!-- /.kpi-grid -->
+
+        <!-- Tool chain strip -->
+        <div class="toolchain-strip">
+          <span class="tc-badge tc-aspen">Aspen HYSYS V14</span>
+          <span class="tc-arrow">→</span>
+          <span class="tc-badge tc-matlab">MATLAB/Simulink R2023b</span>
+          <span class="tc-arrow">→</span>
+          <span class="tc-badge tc-ml">RF · XGBoost · NARX-ANN</span>
+          <span class="tc-arrow">→</span>
+          <span class="tc-badge tc-twin">Digital Twin</span>
+        </div>
+
+      </section>
+
+    </div><!-- /.col-left -->
+
+    <!-- ─── RIGHT COLUMN ─── -->
+    <div class="col col-right">
+
+      <!-- CARD 5: Methodology Pipeline (DIAGRAM) -->
+      <section class="card card-teal-border">
+        <h2 class="card-title">
+          <span class="section-num">05</span>
+          Methodology Pipeline
+        </h2>
+        <div class="pipeline">
+          <div class="pipe-step">
+            <div class="pipe-badge">1</div>
+            <div class="pipe-line"></div>
+            <div class="pipe-content">
+              <div class="pipe-title">First-Principles Modeling</div>
+              <div class="pipe-detail">Derive coupled non-linear ODEs from mass &amp; energy conservation laws for the 2-CSTH with recycle loop</div>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-badge">2</div>
+            <div class="pipe-line"></div>
+            <div class="pipe-content">
+              <div class="pipe-title">Steady-State Validation — Aspen HYSYS V14</div>
+              <div class="pipe-detail">ASME Steam thermodynamic package — convergence validated: T₁ = 59.97°C, T₂ = 69.56°C, h₁ = 1.301 m</div>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-badge">3</div>
+            <div class="pipe-line"></div>
+            <div class="pipe-content">
+              <div class="pipe-title">Dynamic Control Design — MATLAB/Simulink R2023b</div>
+              <div class="pipe-detail">FOPDT open-loop system identification · PID auto-tuning · IMC lambda-filter design for 4 SISO loops</div>
+            </div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-badge">4</div>
+            <div class="pipe-line"></div>
+            <div class="pipe-content">
+              <div class="pipe-title">ML Digital Twin Training</div>
+              <div class="pipe-detail">RF, XGBoost &amp; NARX-ANN trained on 15,000+ dynamic time-series points · Bayesian regularization (MSE = 8.30×10⁻¹²)</div>
+            </div>
+          </div>
+          <div class="pipe-step pipe-last">
+            <div class="pipe-badge pipe-badge-gold">5</div>
+            <div class="pipe-line-none"></div>
+            <div class="pipe-content">
+              <div class="pipe-title">6-Scenario Benchmarking Protocol</div>
+              <div class="pipe-detail">Cold-start · Gradual ramp (4-step) · Robustness — KPIs: IAE, RMSE, MAE, R², Settling Time, Overshoot%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 6: Dynamic Results -->
+      <section class="card card-blue-border">
+        <h2 class="card-title">
+          <span class="section-num">06</span>
+          Dynamic Control Results &amp; Performance
+        </h2>
+
+        <div class="result-img-block">
+          <div class="result-img-label">T₂ Temperature Step Response — PID vs. IMC vs. ANN</div>
+          <img src="images/Dynamic Performance and Tracking Comparison for T2 Temperature.png"
+               class="result-img" alt="T2 Dynamic Performance Comparison">
+          <div class="result-caption">PID (blue) peaks at 80.88°C with 7.84% overshoot; ANN_PID (orange) +6.6% thermal swell. IMC (yellow/green) achieves near-zero overshoot with smooth tracking. Setpoint = 75°C.</div>
+        </div>
+
+        <div class="finding-badge">
+          ⚡ IMC reduces settling time by <strong>75%</strong> (64 s → 16 s) and IAE by <strong>30%</strong> vs. PID
+        </div>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Controller</th>
+              <th>T₂ Overshoot</th>
+              <th>Settling Time</th>
+              <th>IAE vs. PID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Multi-loop PID</strong></td>
+              <td class="bad">7.84% (80.88°C)</td>
+              <td class="bad">64 s</td>
+              <td>Baseline</td>
+            </tr>
+            <tr class="row-highlight">
+              <td><strong>IMC Controller ✓</strong></td>
+              <td class="good">1.25% (T₁: 0%)</td>
+              <td class="good">16 s (−75%)</td>
+              <td class="good">−30%</td>
+            </tr>
+            <tr>
+              <td>ANN_PID (NARX)</td>
+              <td class="bad">+6.6% thermal swell</td>
+              <td>~64 s</td>
+              <td>≈ PID</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="scope-row">
+          <div class="scope-item">
+            <div class="scope-label">🔵 PID Scope — T₁ &amp; T₂</div>
+            <img src="images/PID_T_Scope_spstep.PNG" class="scope-img" alt="PID Temperature Scope">
+            <div class="scope-caption">PID: overshoot visible at startup — T₂ spikes before settling</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-label">🟢 IMC Scope — T₁ &amp; T₂</div>
+            <img src="images/IMC_T_Scope_spstep.PNG" class="scope-img" alt="IMC Temperature Scope">
+            <div class="scope-caption">IMC: clean step tracking — no overshoot, fast settling</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 7: ML Digital Twin -->
+      <section class="card card-gold-border">
+        <h2 class="card-title">
+          <span class="section-num">07</span>
+          Machine Learning Digital Twin Performance
+        </h2>
+
+        <div class="result-img-block">
+          <div class="result-img-label">[IMC] T₂ — Actual vs. RF &amp; XGBoost Predictions</div>
+          <img src="images/[IMC] Dynamic Response of T2 Temperature under Step Changes_ Actual vs Machine Learning Model Predictions.png"
+               class="result-img" alt="IMC T2 ML Predictions">
+          <div class="result-caption">RF (red) and XGBoost (yellow) predictions overlay precisely on IMC actual response (blue) across all 3 setpoint steps — R² > 0.9999 demonstrated visually.</div>
+        </div>
+
+        <div class="finding-badge finding-badge-gold">
+          🎯 RF &amp; XGBoost achieve R² &gt; <strong>0.9999</strong> — near-perfect virtual sensing capability
+        </div>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>ML Model</th>
+              <th>R² (Temp)</th>
+              <th>R² (Level)</th>
+              <th>Key Finding</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-highlight">
+              <td><strong>Random Forest ✓</strong></td>
+              <td class="good">&gt; 0.9999</td>
+              <td class="good">&gt; 0.9999</td>
+              <td>Best: bagging → robust to outliers</td>
+            </tr>
+            <tr class="row-highlight">
+              <td><strong>XGBoost ✓</strong></td>
+              <td class="good">&gt; 0.9999</td>
+              <td class="good">&gt; 0.9999</td>
+              <td>Equivalent accuracy, faster inference</td>
+            </tr>
+            <tr>
+              <td>NARX Neural Network</td>
+              <td class="bad">~0.990</td>
+              <td>Good</td>
+              <td>Phase-lead ~270 s under IMC closed-loop</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="training-row">
+          <div class="training-item">
+            <div class="training-label">NARX Training — IMC Dataset (MSE = 8.30×10⁻¹²)</div>
+            <img src="images/IMC_ANN_Training_progress.PNG" class="training-img" alt="IMC NARX Training Progress">
+          </div>
+          <div class="training-item">
+            <div class="training-label">NARX Training — PID Dataset (MSE = 3.95×10⁻¹²)</div>
+            <img src="images/PID_ANN_Training_progress.PNG" class="training-img" alt="PID NARX Training Progress">
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.col-right -->
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="poster-footer">
+    <div class="footer-inner">
+
+      <!-- SDG LOGO — bottom left -->
+      <div class="footer-sdg">
+        <div class="sdg-title">Aligned UN Sustainable Development Goals</div>
+        <img src="images/SDG.png" alt="United Nations Sustainable Development Goals" class="sdg-img">
+        <div class="sdg-tags">
+          <span class="sdg-tag sdg-7">SDG 7<br><small>Clean Energy</small></span>
+          <span class="sdg-tag sdg-9">SDG 9<br><small>Innovation</small></span>
+          <span class="sdg-tag sdg-12">SDG 12<br><small>Responsible Production</small></span>
+          <span class="sdg-tag sdg-13">SDG 13<br><small>Climate Action</small></span>
+          <span class="sdg-tag sdg-4">SDG 4<br><small>Quality Education</small></span>
+        </div>
+      </div>
+
+      <!-- CONCLUSIONS -->
+      <div class="footer-conclusions">
+        <div class="footer-section-title">Conclusions</div>
+        <div class="conclusion-grid">
+          <div class="conclusion-item">
+            <span class="conc-dot conc-green">●</span>
+            <span class="conc-text"><strong>IMC outperforms PID</strong> in thermal regulation: 75% faster settling (16 s vs. 64 s), 30% lower IAE, zero overshoot in T₁. <em>Recommended for production systems.</em></span>
+          </div>
+          <div class="conclusion-item">
+            <span class="conc-dot conc-green">●</span>
+            <span class="conc-text"><strong>RF &amp; XGBoost</strong> Digital Twins achieve near-perfect state prediction (R² &gt; 0.9999, RMSE &lt; 0.01°C) — directly deployable as virtual sensors for predictive maintenance.</span>
+          </div>
+          <div class="conclusion-item">
+            <span class="conc-dot conc-amber">●</span>
+            <span class="conc-text"><strong>NARX ANN</strong> suffers a ~270 s phase-lead under IMC closed-loop due to unprocessed temporal training data — DTW lag-alignment preprocessing required.</span>
+          </div>
+          <div class="conclusion-item">
+            <span class="conc-dot conc-amber">●</span>
+            <span class="conc-text"><strong>IMC hydraulic bottleneck:</strong> +0.02 m steady-state level offset in h₂ due to uncompensated 20% recycle coupling — multi-variable MPC needed for full constraint handling.</span>
+          </div>
+        </div>
+
+        <div class="future-work">
+          <div class="future-title">▷ Future Work</div>
+          <div class="future-items">
+            <span class="future-chip">Multi-variable MPC</span>
+            <span class="future-chip">DTW lag-alignment for NARX</span>
+            <span class="future-chip">Real-time PLC deployment</span>
+            <span class="future-chip">Pilot plant validation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTIMAL RECOMMENDATION -->
+      <div class="footer-recommendation">
+        <div class="rec-title">Recommended Architecture</div>
+        <div class="rec-body">
+          <div class="rec-row">
+            <span class="rec-icon">🌡</span>
+            <span class="rec-text"><strong>Temperature Control:</strong> IMC Controller<br><small>Zero T₁ overshoot · 75% faster settling</small></span>
+          </div>
+          <div class="rec-row">
+            <span class="rec-icon">📊</span>
+            <span class="rec-text"><strong>Level Digital Twin:</strong> RF / XGBoost<br><small>R² &gt; 0.9999 · Real-time virtual sensing</small></span>
+          </div>
+          <div class="rec-row">
+            <span class="rec-icon">🔗</span>
+            <span class="rec-text"><strong>Coupling:</strong> Hybrid IMC + ML framework<br><small>Industry 4.0 — SDG 7, 9, 12, 13 aligned</small></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.footer-inner -->
+
+    <div class="footer-bar">
+      <span class="footer-bar-text">Supervised by: <strong>Ts. Dr. Muhammad Syahmi Afif Bin Mokhtar Yazid</strong></span>
+      <span class="footer-bar-divider">|</span>
+      <span class="footer-bar-text">School of Engineering &nbsp;·&nbsp; Asia Pacific University of Technology &amp; Innovation</span>
+      <span class="footer-bar-divider">|</span>
+      <span class="footer-bar-text">BEng (Hons) Petroleum Engineering &nbsp;·&nbsp; August 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>
