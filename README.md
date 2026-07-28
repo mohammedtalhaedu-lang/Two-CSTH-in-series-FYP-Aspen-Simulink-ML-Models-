@@ -9,7 +9,7 @@ https://mohammedfyp.netlify.app
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 This repository contains the interactive, responsive A2 academic poster web application for the Final Year Project: **"Modeling and Simulation of Hierarchical Control of Two Continuous Stirred Tank Heaters in Series"**.
 
 - **Student:** Mohammed (TP061730 | APD4F2511PE)
@@ -19,7 +19,7 @@ This repository contains the interactive, responsive A2 academic poster web appl
 
 ---
 
-## 📊 Technical Highlights & Results Summary
+## Technical Highlights & Results Summary
 - **First-Principles & Steady-State Validation:** Non-linear ODE modeling for 2-CSTH with 20% hydraulic recycle loop validated in **Aspen HYSYS V14** ($T_1 = 59.97^\circ\text{C}$, $T_2 = 69.56^\circ\text{C}$, $h_1 = 1.301\text{ m}$).
 - **Internal Model Control (IMC):** Achieves **75% faster settling time** ($16\text{ s}$ vs. $64\text{ s}$) and **30% reduction in IAE** compared to conventional multi-loop PID with zero overshoot on $T_1$.
 - **Machine Learning Digital Twins:** **Random Forest** and **XGBoost** surrogate models achieve near-perfect virtual sensing accuracy ($R^2 > 0.9999$, $\text{RMSE} < 0.01^\circ\text{C}$) on dynamic time-series data.
@@ -27,7 +27,7 @@ This repository contains the interactive, responsive A2 academic poster web appl
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 
 ├── index.html        # Main HTML poster document (Semantic HTML5, fully responsive)
