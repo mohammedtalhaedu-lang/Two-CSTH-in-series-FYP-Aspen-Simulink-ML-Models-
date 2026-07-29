@@ -57,14 +57,13 @@ html {
 }
 
 body {
-  width: 420mm;
-  min-height: 594mm;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   background: var(--bg);
   font-family: 'Inter', Helvetica, sans-serif;
   color: var(--text);
   line-height: 1.5;
-  /* Mobile: allow natural width */
-  max-width: 100%;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -723,7 +722,29 @@ body {
   font-style: italic;
 }
 
-/* Training images */
+/* ── Results 2-column grid for side-by-side charts ── */
+.results-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin-bottom: 4mm;
+}
+
+/* ── Subsection divider label ── */
+.results-subsection-title {
+  font-size: 3.5mm;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-left: 2mm solid var(--blue);
+  padding: 1mm 2.5mm;
+  background: #EEF6FF;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 4mm 0 2mm;
+}
+
+
 .training-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1080,14 +1101,7 @@ body {
    ═══════════════════════════════════════════════════════ */
 @media screen and (min-width: 850px) {
   html {
-    background: #475569;
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-  }
-
-  body {
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    background: var(--bg);
   }
 }
 
@@ -1245,6 +1259,19 @@ body {
   .scope-label   { font-size: 3.5vw; padding: 2vw 3vw; }
   .scope-caption { font-size: 3vw; }
   .training-label { font-size: 3.2vw; }
+
+  /* ─ Results 2-col collapses on mobile ─ */
+  .results-2col {
+    grid-template-columns: 1fr;
+    gap: 3vw;
+    margin-bottom: 3vw;
+  }
+
+  .results-subsection-title {
+    font-size: 3.5vw;
+    margin: 3vw 0 1.5vw;
+    padding: 1.5vw 3vw;
+  }
 
   /* ─ Footer ─ */
   .footer-inner {

@@ -192,86 +192,6 @@
         </div>
       </section>
 
-      <!-- Key Performance Indicators -->
-      <section class="card card-gold-border">
-        <h2 class="card-title">
-          Key Performance Indicators
-        </h2>
-
-        <!-- Model comparison chart -->
-        <div class="result-img-block">
-          <div class="result-img-label">Model Performance Comparison — T₂ Temperature (PID vs IMC vs ANN)</div>
-          <img src="images/Model Performance Comparison for T2 Temperature.png"
-               class="result-img"
-               alt="Model Performance Comparison for T2 Temperature">
-          <div class="result-caption">RF &amp; XGBoost achieve R² &gt; 0.9999 across both PID and IMC datasets. NARX-ANN shows a −270 s phase lead requiring DTW alignment.</div>
-        </div>
-
-        <!-- KPI Grid -->
-        <div class="kpi-grid">
-
-          <div class="kpi-card kpi-bad">
-            <div class="kpi-value">7.84%</div>
-            <div class="kpi-label">PID Overshoot</div>
-            <div class="kpi-sub">T₂ peaks at 80.88°C for 75°C setpoint</div>
-          </div>
-
-          <div class="kpi-card kpi-good">
-            <div class="kpi-value">75% Faster</div>
-            <div class="kpi-label">IMC Settling</div>
-            <div class="kpi-sub">16 s vs 64 s — IMC vs PID</div>
-          </div>
-
-          <div class="kpi-card kpi-good">
-            <div class="kpi-value">R² &gt; 0.9999</div>
-            <div class="kpi-label">ML Twin Accuracy</div>
-            <div class="kpi-sub">RF &amp; XGBoost — near-perfect prediction</div>
-          </div>
-
-          <div class="kpi-card kpi-neutral">
-            <div class="kpi-value">30%</div>
-            <div class="kpi-label">IAE Reduction (IMC)</div>
-            <div class="kpi-sub">Integral Absolute Error vs PID</div>
-          </div>
-
-          <div class="kpi-card kpi-neutral">
-            <div class="kpi-value">8.30×10⁻¹²</div>
-            <div class="kpi-label">NARX MSE</div>
-            <div class="kpi-sub">Bayesian regularisation — IMC dataset</div>
-          </div>
-
-          <div class="kpi-card kpi-bad">
-            <div class="kpi-value">−270 s</div>
-            <div class="kpi-label">NARX Phase Lead</div>
-            <div class="kpi-sub">Requires DTW pre-processing to align</div>
-          </div>
-
-          <div class="kpi-card kpi-neutral">
-            <div class="kpi-value">+0.07 m</div>
-            <div class="kpi-label">Hydraulic Offset (h₂)</div>
-            <div class="kpi-sub">Recycle loop steady-state deviation</div>
-          </div>
-
-          <div class="kpi-card kpi-good">
-            <div class="kpi-value">IMC + RF</div>
-            <div class="kpi-label">Recommended Architecture</div>
-            <div class="kpi-sub">Best stability + virtual sensing combo</div>
-          </div>
-
-        </div><!-- /.kpi-grid -->
-
-        <!-- Tool chain strip -->
-        <div class="toolchain-strip">
-          <span class="tc-badge tc-aspen">Aspen HYSYS V14</span>
-          <span class="tc-arrow">→</span>
-          <span class="tc-badge tc-matlab">MATLAB/Simulink R2023b</span>
-          <span class="tc-arrow">→</span>
-          <span class="tc-badge tc-ml">RF · XGBoost · NARX-ANN</span>
-          <span class="tc-arrow">→</span>
-          <span class="tc-badge tc-twin">Digital Twin</span>
-        </div>
-
-      </section>
 
     </div><!-- /.col-left -->
 
@@ -335,58 +255,243 @@
           Dynamic Control Results &amp; Performance
         </h2>
 
-        <div class="result-img-block">
-          <div class="result-img-label">T₂ Temperature Step Response — PID vs. IMC vs. ANN</div>
-          <img src="images/Dynamic Performance and Tracking Comparison for T2 Temperature.png"
-               class="result-img" alt="T2 Dynamic Performance Comparison">
-          <div class="result-caption">PID (blue) peaks at 80.88°C with 7.84% overshoot; ANN_PID (orange) +6.6% thermal swell. IMC (yellow/green) achieves near-zero overshoot with smooth tracking. Setpoint = 75°C.</div>
+        <!-- Temperature Performance Curves -->
+        <div class="results-subsection-title">Temperature Response — PID vs. IMC vs. ANN</div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">T₁ — Tank 1 Temperature</div>
+            <img src="images/Dynamic Performance and Tracking Comparison for T1 Temperature.png"
+                 class="result-img" alt="T1 Dynamic Performance">
+            <div class="result-caption">T₁: IMC achieves 0% overshoot. PID shows initial thermal lag from coupled dynamics.</div>
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">T₂ — Tank 2 Temperature</div>
+            <img src="images/Dynamic Performance and Tracking Comparison for T2 Temperature.png"
+                 class="result-img" alt="T2 Dynamic Performance">
+            <div class="result-caption">T₂: PID peaks at 80.88°C (7.84% overshoot). IMC tracks setpoint cleanly. ANN_PID shows +6.6% thermal swell.</div>
+          </div>
+        </div>
+
+        <!-- Level Performance Curves -->
+        <div class="results-subsection-title">Liquid Level Response — PID vs. IMC vs. ANN</div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">h₁ — Tank 1 Level</div>
+            <img src="images/Dynamic Performance and Tracking Comparison for H1 Liquid Level.png"
+                 class="result-img" alt="H1 Level Dynamic Performance">
+            <div class="result-caption">h₁: Both PID and IMC maintain stable level. IMC shows smoother settling with less coupling disturbance.</div>
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">h₂ — Tank 2 Level</div>
+            <img src="images/Dynamic Performance and Tracking Comparison for H2 Liquid Level.png"
+                 class="result-img" alt="H2 Level Dynamic Performance">
+            <div class="result-caption">h₂: IMC exhibits +0.07 m steady-state offset due to uncompensated 20% recycle flow coupling.</div>
+          </div>
         </div>
 
         <div class="finding-badge">
           ⚡ IMC reduces settling time by <strong>75%</strong> (64 s → 16 s) and IAE by <strong>30%</strong> vs. PID
         </div>
 
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Controller</th>
-              <th>T₂ Overshoot</th>
-              <th>Settling Time</th>
-              <th>IAE vs. PID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Multi-loop PID</strong></td>
-              <td class="bad">7.84% (80.88°C)</td>
-              <td class="bad">64 s</td>
-              <td>Baseline</td>
-            </tr>
-            <tr class="row-highlight">
-              <td><strong>IMC Controller ✓</strong></td>
-              <td class="good">1.25% (T₁: 0%)</td>
-              <td class="good">16 s (−75%)</td>
-              <td class="good">−30%</td>
-            </tr>
-            <tr>
-              <td>ANN_PID (NARX)</td>
-              <td class="bad">+6.6% thermal swell</td>
-              <td>~64 s</td>
-              <td>≈ PID</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- Comprehensive Controller Performance Tables -->
+        <div class="results-subsection-title">Dynamic Performance Metrics Table — All Controlled Variables</div>
 
+        <!-- 4 Tables Grid (2x2) -->
+        <div class="results-2col">
+
+          <!-- H1 Level Table -->
+          <div>
+            <div class="result-img-label">h₁ — Tank 1 Liquid Level Metrics</div>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Controller</th>
+                  <th>Overshoot</th>
+                  <th>Rise ($t_r$)</th>
+                  <th>Settling ($t_s$)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PID</td>
+                  <td class="bad">+4.6% (~1.36 m)</td>
+                  <td>~5 s</td>
+                  <td>~50 s</td>
+                </tr>
+                <tr>
+                  <td>ANN_PID</td>
+                  <td>+3.0% (~1.34 m)</td>
+                  <td>~3 s</td>
+                  <td>~40 s</td>
+                </tr>
+                <tr>
+                  <td>IMC</td>
+                  <td class="good">+1.5% (~1.32 m)</td>
+                  <td class="good">~2 s</td>
+                  <td class="good">~25 s</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>ANN_IMC ✓</strong></td>
+                  <td class="good"><strong>+0.7% (~1.31 m)</strong></td>
+                  <td class="good"><strong>~2 s</strong></td>
+                  <td class="good"><strong>~15 s</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- H2 Level Table -->
+          <div>
+            <div class="result-img-label">h₂ — Tank 2 Liquid Level Metrics</div>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Controller</th>
+                  <th>Overshoot</th>
+                  <th>Settling ($t_s$)</th>
+                  <th>Final Offset</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PID</td>
+                  <td>~1.33 m</td>
+                  <td>~15 s</td>
+                  <td class="bad">+0.02 m</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>ANN_PID ✓</strong></td>
+                  <td class="good">~1.31 m</td>
+                  <td>~20 s</td>
+                  <td class="good"><strong>0.00 m (Perfect)</strong></td>
+                </tr>
+                <tr>
+                  <td>IMC</td>
+                  <td class="good">None</td>
+                  <td>~25 s</td>
+                  <td class="bad">+0.02 m offset</td>
+                </tr>
+                <tr>
+                  <td>ANN_IMC</td>
+                  <td class="good">None</td>
+                  <td class="good">~15 s</td>
+                  <td class="bad">+0.02 m offset</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- T1 Temp Table -->
+          <div>
+            <div class="result-img-label">T₁ — Tank 1 Temperature Metrics</div>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Controller</th>
+                  <th>Overshoot</th>
+                  <th>Rise ($t_r$)</th>
+                  <th>Settling ($t_s$)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PID</td>
+                  <td class="bad">+5.0% (~63.0°C)</td>
+                  <td>~25 s</td>
+                  <td>~120 s</td>
+                </tr>
+                <tr>
+                  <td>ANN_PID</td>
+                  <td class="bad">+6.6% (~64.0°C)</td>
+                  <td>~15 s</td>
+                  <td>~90 s</td>
+                </tr>
+                <tr>
+                  <td>IMC</td>
+                  <td class="good">None (0%)</td>
+                  <td>~60 s</td>
+                  <td>~150 s</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>ANN_IMC ✓</strong></td>
+                  <td class="good"><strong>+1.6% (~61.0°C)</strong></td>
+                  <td class="good"><strong>~10 s</strong></td>
+                  <td class="good"><strong>~60 s</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- T2 Temp Table -->
+          <div>
+            <div class="result-img-label">T₂ — Tank 2 Temperature Metrics</div>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Controller</th>
+                  <th>Overshoot</th>
+                  <th>Rise ($t_r$)</th>
+                  <th>Settling ($t_s$)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PID</td>
+                  <td class="bad">+6.6% (~80.0°C)</td>
+                  <td>~15 s</td>
+                  <td>~110 s</td>
+                </tr>
+                <tr>
+                  <td>ANN_PID</td>
+                  <td>+4.0% (~78.0°C)</td>
+                  <td>~10 s</td>
+                  <td>~90 s</td>
+                </tr>
+                <tr>
+                  <td>IMC</td>
+                  <td class="good">None (0%)</td>
+                  <td>~30 s</td>
+                  <td>~100 s</td>
+                </tr>
+                <tr class="row-highlight">
+                  <td><strong>ANN_IMC ✓</strong></td>
+                  <td class="good"><strong>+1.3% (~76.0°C)</strong></td>
+                  <td>~15 s</td>
+                  <td class="good"><strong>~70 s</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- /.results-2col -->
+
+        <!-- Temperature Scopes -->
+        <div class="results-subsection-title">Simulink Scopes — Temperature (T₁ &amp; T₂)</div>
         <div class="scope-row">
           <div class="scope-item">
-            <div class="scope-label">🔵 PID Scope — T₁ &amp; T₂</div>
+            <div class="scope-label">PID Scope — T₁ &amp; T₂</div>
             <img src="images/PID_T_Scope_spstep.PNG" class="scope-img" alt="PID Temperature Scope">
             <div class="scope-caption">PID: overshoot visible at startup — T₂ spikes before settling</div>
           </div>
           <div class="scope-item">
-            <div class="scope-label">🟢 IMC Scope — T₁ &amp; T₂</div>
+            <div class="scope-label">IMC Scope — T₁ &amp; T₂</div>
             <img src="images/IMC_T_Scope_spstep.PNG" class="scope-img" alt="IMC Temperature Scope">
             <div class="scope-caption">IMC: clean step tracking — no overshoot, fast settling</div>
+          </div>
+        </div>
+
+        <!-- Level Scopes -->
+        <div class="results-subsection-title">Simulink Scopes — Liquid Level (h₁ &amp; h₂)</div>
+        <div class="scope-row">
+          <div class="scope-item">
+            <div class="scope-label">PID Scope — h₁ &amp; h₂</div>
+            <img src="images/PID_h_Scope_spstep.PNG" class="scope-img" alt="PID Level Scope">
+            <div class="scope-caption">PID: level oscillations visible at each step change</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-label">IMC Scope — h₁ &amp; h₂</div>
+            <img src="images/IMC_h_Scope_spstep.PNG" class="scope-img" alt="IMC Level Scope">
+            <div class="scope-caption">IMC: stable level tracking with small h₂ steady-state offset</div>
           </div>
         </div>
       </section>
@@ -398,17 +503,72 @@
           Machine Learning Digital Twin Performance
         </h2>
 
-        <div class="result-img-block">
-          <div class="result-img-label">[IMC] T₂ — Actual vs. RF &amp; XGBoost Predictions</div>
-          <img src="images/[IMC] Dynamic Response of T2 Temperature under Step Changes_ Actual vs Machine Learning Model Predictions.png"
-               class="result-img" alt="IMC T2 ML Predictions">
-          <div class="result-caption">RF (red) and XGBoost (yellow) predictions overlay precisely on IMC actual response (blue) across all 3 setpoint steps — R² > 0.9999 demonstrated visually.</div>
-        </div>
-
         <div class="finding-badge finding-badge-gold">
           🎯 RF &amp; XGBoost achieve R² &gt; <strong>0.9999</strong> — near-perfect virtual sensing capability
         </div>
 
+        <!-- IMC Step-Change Predictions: Temperature -->
+        <div class="results-subsection-title">[IMC] Step-Change Predictions — Temperature</div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">T₁ — Actual vs. RF &amp; XGBoost</div>
+            <img src="images/[IMC] Dynamic Response of T1 Temperature under Step Changes_ Actual vs Machine Learning Model Predictions.png"
+                 class="result-img" alt="IMC T1 ML Predictions">
+            <div class="result-caption">RF and XGBoost track IMC T₁ response with R² &gt; 0.9999 across all step changes.</div>
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">T₂ — Actual vs. RF &amp; XGBoost</div>
+            <img src="images/[IMC] Dynamic Response of T2 Temperature under Step Changes_ Actual vs Machine Learning Model Predictions.png"
+                 class="result-img" alt="IMC T2 ML Predictions">
+            <div class="result-caption">RF (red) and XGBoost (yellow) overlay precisely on IMC actual T₂ (blue). R² &gt; 0.9999 demonstrated visually.</div>
+          </div>
+        </div>
+
+        <!-- IMC Step-Change Predictions: Level -->
+        <div class="results-subsection-title">[IMC] Step-Change Predictions — Liquid Level</div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">h₁ — Actual vs. RF &amp; XGBoost</div>
+            <img src="images/[IMC] Dynamic Response of H1 Level under Step Changes_ Actual vs Machine Learning Model Predictions.png"
+                 class="result-img" alt="IMC H1 ML Predictions">
+            <div class="result-caption">h₁ level: ML predictions closely follow actual IMC response across all setpoints.</div>
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">h₂ — Actual vs. RF &amp; XGBoost</div>
+            <img src="images/[IMC] Dynamic Response of H2 Level under Step Changes_ Actual vs Machine Learning Model Predictions.png"
+                 class="result-img" alt="IMC H2 ML Predictions">
+            <div class="result-caption">h₂ level: ML surrogates capture recycle-loop offset. NARX shows −270 s phase lead.</div>
+          </div>
+        </div>
+
+        <!-- Model Performance Comparison Charts -->
+        <div class="results-subsection-title">Model Performance Comparison (RF · XGBoost · NARX)</div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">T₁ Temperature</div>
+            <img src="images/Model Performance Comparison for T1 Temperature.png"
+                 class="result-img" alt="Model Performance T1">
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">T₂ Temperature</div>
+            <img src="images/Model Performance Comparison for T2 Temperature.png"
+                 class="result-img" alt="Model Performance T2">
+          </div>
+        </div>
+        <div class="results-2col">
+          <div class="result-img-block">
+            <div class="result-img-label">h₁ Liquid Level</div>
+            <img src="images/Model Performance Comparison for H1 Liquid Level.png"
+                 class="result-img" alt="Model Performance H1">
+          </div>
+          <div class="result-img-block">
+            <div class="result-img-label">h₂ Liquid Level</div>
+            <img src="images/Model Performance Comparison for H2 Liquid Level.png"
+                 class="result-img" alt="Model Performance H2">
+          </div>
+        </div>
+
+        <!-- ML Comparison Table -->
         <table class="results-table">
           <thead>
             <tr>
@@ -440,13 +600,15 @@
           </tbody>
         </table>
 
+        <!-- NARX Training Progress -->
+        <div class="results-subsection-title">NARX-ANN Training Progress</div>
         <div class="training-row">
           <div class="training-item">
-            <div class="training-label">NARX Training — IMC Dataset (MSE = 8.30×10⁻¹²)</div>
+            <div class="training-label">IMC Dataset (MSE = 8.30×10⁻¹²)</div>
             <img src="images/IMC_ANN_Training_progress.PNG" class="training-img" alt="IMC NARX Training Progress">
           </div>
           <div class="training-item">
-            <div class="training-label">NARX Training — PID Dataset (MSE = 3.95×10⁻¹²)</div>
+            <div class="training-label">PID Dataset (MSE = 3.95×10⁻¹²)</div>
             <img src="images/PID_ANN_Training_progress.PNG" class="training-img" alt="PID NARX Training Progress">
           </div>
         </div>
